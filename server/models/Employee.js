@@ -10,6 +10,14 @@ const EmployeeSchema = new mongoose.Schema({
 
     designation: String,
 
+    status:String,
+
+    hoursToday:Number,
+    
+    productivity:Number,
+    
+    idleTime:String,
+
     status: {
         type: String,
         default: 'active'

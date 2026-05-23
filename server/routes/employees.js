@@ -43,15 +43,14 @@ router.post('/', async (req, res) => {
 
         const employee = new Employee({
 
-            name: req.body.name,
-            email: req.body.email,
-            department: req.body.department,
-            designation: req.body.designation,
-
-            status: 'active',
-            score: 80,
-            hrs: '0h',
-            idle: '-'
+              name: "surya prakash",
+              email: "surya@test.com",
+              department:"engineering",
+              designation: "frontend developer",
+              status: "active",
+              hoursToday: 8,
+              productivity: 92,
+              idleTime: "20m"
         });
 
         await employee.save();
