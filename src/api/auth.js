@@ -4,6 +4,5 @@ const API = axios.create({
   baseURL: 'https://workforce-api-fxeq.onrender.com/api'
 });
 
-export const registerUser = (data) => API.post('/register', data);
-
-export const loginUser = (data) => API.post('/login', data);
+export const login = (data) =>
+  API.post('/auth/login', data);
