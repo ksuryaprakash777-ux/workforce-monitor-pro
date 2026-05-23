@@ -7,45 +7,41 @@ const router = express.Router();
 
 
 // REGISTER
-router.post('/register', async (req, res) => {
+router.post('/login', async (req, res) => {
 
-  try {
+    try {
 
-    const { name, email, password, role } = req.body;
+        const { email, password } = req.body;
 
-    let user = await User.findOne({ email });
+        // DEMO ADMIN LOGIN
+        if (
+            email === 'admin@nexacorp.io' &&
+            password === 'admin123'
+        ) {
 
-    if (user) {
-      return res.status(400).json({
-        message: 'User already exists'
-      });
+            return res.json({
+                token: 'demo-token',
+                user: {
+                    id: '1',
+                    name: 'Admin User',
+                    email: 'admin@nexacorp.io',
+                    role: 'admin'
+                }
+            });
+        }
+
+        return res.status(401).json({
+            message: 'Invalid Credentials'
+        });
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.status(500).json({
+            message: 'Server Error'
+        });
     }
-
-    const salt = await bcrypt.genSalt(10);
-
-    const hashedPassword = await bcrypt.hash(password, salt);
-
-    user = new User({
-      name,
-      email,
-      password: hashedPassword,
-      role
-    });
-
-    await user.save();
-
-    res.status(201).json({
-      message: 'User registered successfully'
-    });
-
-  } catch (error) {
-
-    console.log(error);
-
-    res.status(500).json({
-      message: 'Server Error'
-    });
-  }
 });
 
 
